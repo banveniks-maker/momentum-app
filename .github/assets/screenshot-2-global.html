@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:#0a0a0f;font-family:'Arial Black',Arial,sans-serif;overflow:hidden;position:relative}
+.orb{position:absolute;border-radius:50%;filter:blur(160px)}
+.o1{width:700px;height:700px;background:#ffcc00;top:-300px;right:-200px;opacity:.06}
+.o2{width:500px;height:500px;background:#00ccff;bottom:-100px;left:-150px;opacity:.05}
+.status{display:flex;justify-content:space-between;padding:40px 60px 20px;color:#5a5a7a;font-size:28px;font-family:Arial}
+.header{padding:24px 60px 30px;border-bottom:1px solid rgba(255,255,255,.07)}
+.header-title{font-family:monospace;font-size:26px;letter-spacing:6px;color:#ffcc00}
+
+.my-rank{background:linear-gradient(135deg,rgba(0,255,136,.1),rgba(0,204,255,.05));border:1px solid rgba(0,255,136,.25);border-radius:28px;padding:40px 50px;display:flex;align-items:center;gap:40px;margin:40px 60px 0}
+.my-rank-num{font-size:130px;line-height:1;color:#00ff88;letter-spacing:-4px}
+.my-rank-label{font-family:monospace;font-size:22px;letter-spacing:4px;color:#5a5a7a;margin-bottom:10px}
+.my-rank-country{font-size:44px;font-weight:700}
+.my-rank-sub{font-size:28px;color:#5a5a7a;margin-top:8px;font-family:Arial}
+
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:20px;margin:40px 60px 10px}
+.pcol{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pflag{font-size:70px}
+.prank{font-size:64px;line-height:1}
+.g1{color:#ffcc00}.g2{color:#aaa}.g3{color:#cd7f32}
+.pavg{font-family:monospace;font-size:24px;color:#5a5a7a}
+.pname{font-size:28px;font-weight:600;text-align:center;max-width:180px;color:#e8e8f0}
+.pbar{width:148px;border-radius:16px 16px 0 0}
+.pb1{height:200px;background:linear-gradient(0deg,rgba(255,204,0,.3),rgba(255,204,0,.08));border:1px solid rgba(255,204,0,.3)}
+.pb2{height:140px;background:linear-gradient(0deg,rgba(170,170,170,.2),rgba(170,170,170,.05));border:1px solid rgba(170,170,170,.2)}
+.pb3{height:100px;background:linear-gradient(0deg,rgba(205,127,50,.2),rgba(205,127,50,.05));border:1px solid rgba(205,127,50,.2)}
+
+.sec-title{font-family:monospace;font-size:22px;letter-spacing:6px;color:#5a5a7a;margin-bottom:24px}
+.rank-row{display:flex;align-items:center;gap:28px;background:#1c1c2e;border-radius:24px;border:1px solid rgba(255,255,255,.07);padding:28px 40px;margin-bottom:14px}
+.rank-row.me{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.04)}
+.rnum{font-size:44px;color:#5a5a7a;width:70px;flex-shrink:0}
+.rflag{font-size:52px;flex-shrink:0}
+.rcountry{font-size:34px;font-weight:600;color:#e8e8f0}
+.rplayers{font-family:monospace;font-size:22px;color:#5a5a7a;margin-top:4px}
+.rscore{font-size:52px;color:#00ff88;margin-left:auto}
+.rtrend{font-size:28px;text-align:right}
+
+.nav{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);border-top:1px solid rgba(255,255,255,.07);display:flex;padding:24px 0 50px}
+.ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4}
+.ntab.on{opacity:1}
+.ntab-icon{font-size:44px}
+.ntab-label{font-family:monospace;font-size:18px;letter-spacing:3px;color:#e8e8f0}
+.ntab.on .ntab-label{color:#ffcc00}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<div class="status"><span>9:41</span><span>●●● 5G 🔋</span></div>
+<div class="header"><div class="header-title">🏆 TOP COUNTRIES</div></div>
+
+<div style="padding:0 0;overflow:hidden">
+
+<div class="my-rank">
+  <div class="my-rank-num">#8</div>
+  <div>
+    <div class="my-rank-label">YOUR COUNTRY</div>
+    <div class="my-rank-country">🇺🇸 United States</div>
+    <div class="my-rank-sub">Top 12% globally · 847 pts this week</div>
+  </div>
+</div>
+
+<div class="podium">
+  <div class="pcol">
+    <div class="pflag">🇰🇷</div>
+    <div class="prank g2">2nd</div>
+    <div class="pavg">80 avg</div>
+    <div class="pname">South Korea</div>
+    <div class="pbar pb2"></div>
+  </div>
+  <div class="pcol">
+    <div class="pflag">🇯🇵</div>
+    <div class="prank g1">1st</div>
+    <div class="pavg">82 avg</div>
+    <div class="pname">Japan</div>
+    <div class="pbar pb1"></div>
+  </div>
+  <div class="pcol">
+    <div class="pflag">🇩🇪</div>
+    <div class="prank g3">3rd</div>
+    <div class="pavg">78 avg</div>
+    <div class="pname">Germany</div>
+    <div class="pbar pb3"></div>
+  </div>
+</div>
+
+<div style="padding:0 60px;margin-top:20px">
+  <div class="sec-title">LEADERBOARD</div>
+  <div class="rank-row">
+    <div class="rnum">1</div><div class="rflag">🇯🇵</div>
+    <div><div class="rcountry">Japan</div><div class="rplayers">12,840 players</div></div>
+    <div><div class="rscore">82</div><div class="rtrend" style="color:#00ff88">▲</div></div>
+  </div>
+  <div class="rank-row">
+    <div class="rnum">2</div><div class="rflag">🇰🇷</div>
+    <div><div class="rcountry">South Korea</div><div class="rplayers">9,230 players</div></div>
+    <div><div class="rscore">80</div><div class="rtrend" style="color:#00ff88">▲</div></div>
+  </div>
+  <div class="rank-row">
+    <div class="rnum">3</div><div class="rflag">🇩🇪</div>
+    <div><div class="rcountry">Germany</div><div class="rplayers">14,200 players</div></div>
+    <div><div class="rscore">78</div><div class="rtrend" style="color:#ff3366">▼</div></div>
+  </div>
+  <div class="rank-row me">
+    <div class="rnum">8</div><div class="rflag">🇺🇸</div>
+    <div><div class="rcountry">United States ← YOU</div><div class="rplayers">48,000 players</div></div>
+    <div><div class="rscore">73</div><div class="rtrend" style="color:#ff3366">▼</div></div>
+  </div>
+  <div class="rank-row">
+    <div class="rnum">9</div><div class="rflag">🇷🇺</div>
+    <div><div class="rcountry">Russia</div><div class="rplayers">19,000 players</div></div>
+    <div><div class="rscore">65</div><div class="rtrend" style="color:#ff3366">▼</div></div>
+  </div>
+</div>
+</div>
+
+<div class="nav">
+  <div class="ntab"><div class="ntab-icon">⚡</div><div class="ntab-label">TODAY</div></div>
+  <div class="ntab on"><div class="ntab-icon">🌍</div><div class="ntab-label">GLOBAL</div></div>
+  <div class="ntab"><div class="ntab-icon">👥</div><div class="ntab-label">SOCIAL</div></div>
+  <div class="ntab"><div class="ntab-icon">🤖</div><div class="ntab-label">AI</div></div>
+  <div class="ntab"><div class="ntab-icon">😎</div><div class="ntab-label">ME</div></div>
+</div>
+</body></html>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" fill="#0a0a0f" rx="180"/>
+
+  <!-- Glow orb -->
+  <circle cx="512" cy="512" r="380" fill="url(#glow)"/>
+
+  <!-- Corner accent lines -->
+  <line x1="100" y1="120" x2="200" y2="120" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="100" y1="120" x2="100" y2="220" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="924" y1="120" x2="824" y2="120" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="924" y1="120" x2="924" y2="220" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="100" y1="904" x2="200" y2="904" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="100" y1="904" x2="100" y2="804" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="924" y1="904" x2="824" y2="904" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+  <line x1="924" y1="904" x2="924" y2="804" stroke="#00ff88" stroke-width="3" opacity="0.4"/>
+
+  <!-- Top accent bar -->
+  <rect x="80" y="80" width="864" height="4" rx="2" fill="#00ff88" opacity="0.15"/>
+
+  <!-- M letter - bold, Bebas-like -->
+  <text
+    x="512" y="600"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-size="600"
+    font-weight="900"
+    fill="#00ff88"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    filter="url(#shadow)"
+    letter-spacing="-20"
+  >M</text>
+
+  <!-- Glow text effect -->
+  <text
+    x="512" y="600"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-size="600"
+    font-weight="900"
+    fill="none"
+    stroke="#00ff88"
+    stroke-width="2"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    opacity="0.5"
+    letter-spacing="-20"
+  >M</text>
+
+  <!-- Bottom label -->
+  <text
+    x="512" y="900"
+    font-family="'Arial', sans-serif"
+    font-size="52"
+    font-weight="400"
+    fill="#5a5a7a"
+    text-anchor="middle"
+    letter-spacing="18"
+  >MOMENTUM</text>
+
+  <!-- Energy bar at bottom -->
+  <rect x="200" y="940" width="624" height="4" rx="2" fill="#1c1c2e"/>
+  <rect x="200" y="940" width="460" height="4" rx="2" fill="#00ff88" opacity="0.8"/>
+
+  <!-- Small dots -->
+  <circle cx="512" cy="160" r="4" fill="#00ff88" opacity="0.6"/>
+  <circle cx="480" cy="160" r="3" fill="#00ff88" opacity="0.3"/>
+  <circle cx="544" cy="160" r="3" fill="#00ff88" opacity="0.3"/>
+</svg>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1024px;height:500px;background:#0a0a0f;font-family:'Arial Black',Arial,sans-serif;overflow:hidden;position:relative}
+.orb{position:absolute;border-radius:50%;filter:blur(100px)}
+.o1{width:500px;height:500px;background:#00ff88;top:-200px;left:-100px;opacity:.1}
+.o2{width:400px;height:400px;background:#ff3366;bottom:-150px;right:-100px;opacity:.08}
+.o3{width:300px;height:300px;background:#00ccff;top:0;right:300px;opacity:.06}
+
+.content{position:relative;z-index:1;display:flex;align-items:center;height:100%;padding:40px 60px}
+
+.left{flex:1}
+.logo{font-size:96px;letter-spacing:8px;color:#00ff88;line-height:1;text-shadow:0 0 60px rgba(0,255,136,.4)}
+.tagline{font-size:28px;font-weight:400;font-family:Arial;color:#5a5a7a;letter-spacing:3px;margin-top:8px}
+.features{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap}
+.feat{background:#13131c;border:1px solid rgba(255,255,255,.1);border-radius:40px;padding:10px 22px;font-size:22px;color:#e8e8f0;font-family:Arial}
+
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
+.score-card{background:#13131c;border:1px solid rgba(0,255,136,.2);border-radius:24px;padding:24px 32px;text-align:center;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00ff88,#00ccff)}
+.score-num{font-size:100px;line-height:1;color:#00ff88;text-shadow:0 0 40px rgba(0,255,136,.5);letter-spacing:-4px}
+.score-lbl{font-family:monospace;font-size:16px;letter-spacing:4px;color:#5a5a7a}
+
+.mini-cards{display:flex;gap:12px}
+.mc{background:#13131c;border-radius:16px;border:1px solid rgba(255,255,255,.07);padding:16px 24px;text-align:center}
+.mc-icon{font-size:28px}
+.mc-val{font-size:32px;color:#00ff88;font-family:'Arial Black',Arial;line-height:1.2}
+.mc-lbl{font-family:monospace;font-size:13px;color:#5a5a7a;letter-spacing:1px}
+
+/* Divider line */
+.divider{width:2px;height:300px;background:linear-gradient(180deg,transparent,rgba(0,255,136,.3),transparent);margin:0 48px}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+
+<div class="content">
+  <div class="left">
+    <div class="logo">MOMENTUM</div>
+    <div class="tagline">HABIT TRACKER · AI COACH · GLOBAL RANKING</div>
+    <div class="features">
+      <div class="feat">⚡ Energy Score</div>
+      <div class="feat">🌍 16 Countries</div>
+      <div class="feat">🤖 Claude AI</div>
+      <div class="feat">👥 Challenges</div>
+      <div class="feat">🔥 Streaks</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="right">
+    <div class="score-card">
+      <div class="score-num">73</div>
+      <div class="score-lbl">ENERGY SCORE</div>
+    </div>
+    <div class="mini-cards">
+      <div class="mc">
+        <div class="mc-icon">🔥</div>
+        <div class="mc-val">21</div>
+        <div class="mc-lbl">STREAK</div>
+      </div>
+      <div class="mc">
+        <div class="mc-icon">🌍</div>
+        <div class="mc-val">#8</div>
+        <div class="mc-lbl">GLOBAL</div>
+      </div>
+      <div class="mc">
+        <div class="mc-icon">🤖</div>
+        <div class="mc-val">AI</div>
+        <div class="mc-lbl">COACH</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:#0a0a0f;font-family:'Arial Black',Arial,sans-serif;overflow:hidden;position:relative}
+.noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:99}
+.orb{position:absolute;border-radius:50%;filter:blur(160px)}
+.o1{width:800px;height:800px;background:#00ff88;top:-300px;left:-250px;opacity:.08}
+.o2{width:600px;height:600px;background:#ff3366;bottom:-200px;right:-150px;opacity:.06}
+
+/* Status bar */
+.status{display:flex;justify-content:space-between;align-items:center;padding:40px 60px 20px;color:#5a5a7a;font-size:28px;font-family:Arial}
+
+/* Top bar */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:20px 60px 30px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.logo{font-size:72px;letter-spacing:6px;color:#00ff88;text-shadow:0 0 40px rgba(0,255,136,.4)}
+.logo-sub{font-size:22px;letter-spacing:4px;color:#5a5a7a;margin-top:4px;font-family:monospace}
+.date-pill{background:#13131c;border:1px solid rgba(255,255,255,.07);border-radius:40px;padding:16px 32px;font-size:26px;color:#5a5a7a;font-family:monospace}
+
+/* Energy card */
+.card{background:#13131c;border:1px solid rgba(255,255,255,.07);border-radius:36px;padding:50px;margin:40px 60px 0;position:relative;overflow:hidden}
+.card-accent{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00ff88,#00ccff,transparent)}
+.card-label{font-family:monospace;font-size:22px;letter-spacing:6px;color:#5a5a7a;margin-bottom:24px}
+.energy-row{display:flex;align-items:center;gap:40px;margin-bottom:30px}
+.big-num{font-size:200px;line-height:1;color:#00ff88;text-shadow:0 0 80px rgba(0,255,136,.5);letter-spacing:-10px}
+.status-right{}
+.status-txt{font-size:48px;color:#e8e8f0;margin-bottom:10px}
+.country-txt{font-size:36px;color:#5a5a7a}
+.bar-track{background:#1c1c2e;border-radius:6px;height:12px;overflow:hidden;margin-bottom:20px}
+.bar-fill{height:100%;background:linear-gradient(90deg,#00ff88,#00ffcc);border-radius:6px;width:73%;box-shadow:0 0 20px rgba(0,255,136,.4)}
+.dots{display:flex;gap:10px}
+.dot{flex:1;height:6px;border-radius:3px;background:#1c1c2e}
+.dot.on{background:#00ff88}
+
+/* Mood */
+.sec-title{font-family:monospace;font-size:22px;letter-spacing:6px;color:#5a5a7a;margin-bottom:24px}
+.mood-row{display:flex;gap:16px}
+.mbtn{flex:1;background:#1c1c2e;border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:28px 8px;text-align:center}
+.mbtn.on{border-color:#00ff88;background:rgba(0,255,136,.08)}
+.mbtn-emoji{font-size:44px}
+.mbtn-label{font-family:monospace;font-size:18px;color:#5a5a7a;margin-top:10px;letter-spacing:1px}
+
+/* Week */
+.wchart{display:flex;gap:14px;align-items:flex-end;height:160px;padding:0 4px}
+.wcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:12px}
+.wbar{width:100%;border-radius:10px 10px 4px 4px;background:#1c1c2e;position:relative;overflow:hidden}
+.wfill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,#00ff88,rgba(0,255,136,.3));border-radius:10px}
+.wday{font-family:monospace;font-size:22px;color:#5a5a7a}
+
+/* Habits */
+.habit{background:#13131c;border:1px solid rgba(255,255,255,.07);border-radius:28px;padding:34px 40px;display:flex;align-items:center;gap:28px;margin-bottom:16px;position:relative;overflow:hidden}
+.habit.done{background:rgba(0,255,136,.03);border-color:rgba(0,255,136,.15)}
+.habit.done::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#00ff88;border-radius:0 4px 4px 0}
+.hcheck{width:52px;height:52px;border-radius:50%;border:3px solid #5a5a7a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#000;flex-shrink:0}
+.hcheck.on{background:#00ff88;border-color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,.35)}
+.hname{font-size:32px;color:#e8e8f0;font-weight:600}
+.habit.done .hname{color:#5a5a7a;text-decoration:line-through}
+.hstreak{font-family:monospace;font-size:24px;color:#5a5a7a}
+.hpts{font-size:44px;color:#00ff88;margin-left:auto;flex-shrink:0}
+.habit.done .hpts{opacity:.3}
+
+/* Bottom nav */
+.nav{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);border-top:1px solid rgba(255,255,255,.07);display:flex;padding:24px 0 50px}
+.ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4}
+.ntab.on{opacity:1}
+.ntab-icon{font-size:44px}
+.ntab-label{font-family:monospace;font-size:18px;letter-spacing:3px;color:#e8e8f0}
+.ntab.on .ntab-label{color:#00ff88}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<div class="status">
+  <span>9:41</span>
+  <span>●●● 5G 🔋</span>
+</div>
+
+<div class="topbar">
+  <div>
+    <div class="logo">MOMENTUM</div>
+    <div class="logo-sub">ENERGY TRACKER</div>
+  </div>
+  <div class="date-pill">MON · 24/02</div>
+</div>
+
+<div style="padding:0 60px;overflow:hidden">
+
+<div class="card">
+  <div class="card-accent"></div>
+  <div class="card-label">TODAY'S ENERGY</div>
+  <div class="energy-row">
+    <div class="big-num">73</div>
+    <div class="status-right">
+      <div class="status-txt">🔥 On fire</div>
+      <div class="country-txt">🇺🇸 United States</div>
+    </div>
+  </div>
+  <div class="bar-track"><div class="bar-fill"></div></div>
+  <div class="dots">
+    <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+    <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+    <div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+</div>
+
+<div style="margin-top:40px">
+  <div class="sec-title">HOW DO YOU FEEL?</div>
+  <div class="mood-row">
+    <div class="mbtn"><div class="mbtn-emoji">⚡️</div><div class="mbtn-label">ON FIRE</div></div>
+    <div class="mbtn on"><div class="mbtn-emoji">😊</div><div class="mbtn-label">GOOD</div></div>
+    <div class="mbtn"><div class="mbtn-emoji">😐</div><div class="mbtn-label">OK</div></div>
+    <div class="mbtn"><div class="mbtn-emoji">😴</div><div class="mbtn-label">TIRED</div></div>
+    <div class="mbtn"><div class="mbtn-emoji">💀</div><div class="mbtn-label">DEAD</div></div>
+  </div>
+</div>
+
+<div style="margin-top:40px">
+  <div class="sec-title">THIS WEEK</div>
+  <div class="wchart">
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:58px"></div></div><div class="wday">MO</div></div>
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:88px"></div></div><div class="wday">TU</div></div>
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:94px"></div></div><div class="wday">WE</div></div>
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:71px"></div></div><div class="wday">TH</div></div>
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:104px"></div></div><div class="wday">FR</div></div>
+    <div class="wcol"><div class="wbar" style="height:130px"><div class="wfill" style="height:95px"></div></div><div class="wday">SA</div></div>
+    <div class="wcol" style="color:#00ff88"><div class="wbar today" style="height:130px;border:1px solid rgba(0,255,136,.3)"><div class="wfill" style="height:95px;background:linear-gradient(0deg,#00ff88,#00ffcc)"></div></div><div class="wday" style="color:#00ff88">SU</div></div>
+  </div>
+</div>
+
+<div style="margin-top:40px">
+  <div class="sec-title">TODAY'S HABITS</div>
+  <div class="habit done">
+    <div class="hcheck on">✓</div>
+    <div><div class="hname">💧 Drink water</div><div class="hstreak">🔥 14 day streak</div></div>
+    <div class="hpts">+5</div>
+  </div>
+  <div class="habit">
+    <div class="hcheck"></div>
+    <div><div class="hname">💪 Morning workout</div><div class="hstreak">🔥 7 day streak</div></div>
+    <div class="hpts">+15</div>
+  </div>
+  <div class="habit">
+    <div class="hcheck"></div>
+    <div><div class="hname">🧘 Meditation</div><div class="hstreak">🔥 3 day streak</div></div>
+    <div class="hpts">+12</div>
+  </div>
+  <div class="habit">
+    <div class="hcheck"></div>
+    <div><div class="hname">📚 Read 30 min</div><div class="hstreak">🔥 21 day streak</div></div>
+    <div class="hpts">+10</div>
+  </div>
+</div>
+
+</div>
+
+<div class="nav">
+  <div class="ntab on"><div class="ntab-icon">⚡</div><div class="ntab-label">TODAY</div></div>
+  <div class="ntab"><div class="ntab-icon">🌍</div><div class="ntab-label">GLOBAL</div></div>
+  <div class="ntab"><div class="ntab-icon">👥</div><div class="ntab-label">SOCIAL</div></div>
+  <div class="ntab"><div class="ntab-icon">🤖</div><div class="ntab-label">AI</div></div>
+  <div class="ntab"><div class="ntab-icon">😎</div><div class="ntab-label">ME</div></div>
+</div>
+</body>
+</html>
